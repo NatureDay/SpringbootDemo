@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.configurer;
 
 import com.example.demo.interceptor.TestInterceptor;
 import org.springframework.context.annotation.Configuration;

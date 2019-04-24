@@ -1,5 +1,7 @@
 package com.example.demo.listener;
 
+import com.example.demo.util.LogUtil;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -13,11 +15,11 @@ public class TestServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("------TestServletContextListener------contextInitialized----------");
+        LogUtil.info("------TestServletContextListener------contextInitialized----------");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("------TestServletContextListener------contextDestroyed----------");
+        LogUtil.info("------TestServletContextListener------contextDestroyed----------");
     }
 }

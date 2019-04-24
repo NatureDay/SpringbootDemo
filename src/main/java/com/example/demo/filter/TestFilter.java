@@ -1,5 +1,7 @@
 package com.example.demo.filter;
 
+import com.example.demo.util.LogUtil;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
@@ -16,17 +18,17 @@ public class TestFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("------TestFilter------init----------");
+        LogUtil.info("------TestFilter------init----------");
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("------TestFilter------doFilter----------");
+        LogUtil.info("------TestFilter------doFilter----------");
         chain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
-        System.out.println("------TestFilter------destroy----------");
+        LogUtil.info("------TestFilter------destroy----------");
     }
 }

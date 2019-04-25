@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired
-    UserMapper userMapper;
+    @Autowired(required = false)
+    private UserMapper userMapper;
 
     public User getUser(int id) {
         return userMapper.getUser(id);

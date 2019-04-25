@@ -1,13 +1,17 @@
 package com.example.demo.mapper;
 
 import com.example.demo.model.User;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface UserMapper {
 
-    @Select("SELECT * FROM user WHERE id = #{id}")
+//    User insertUser(User uesr);
+
     User getUser(int id);
+
+//    User updateUser(int id);
+//
+//    User deleteUser(int id);
 
 }

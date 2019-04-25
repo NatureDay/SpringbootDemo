@@ -1,0 +1,14 @@
+#SpringBoot整合MyBatis框架
+#数据库配置
+#加上?serverTimezone=GMT%2B8" 即可  GMT%2B8代表： 东八区
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+#加载MyBatis配置文件
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.demo.model

@@ -9,7 +9,7 @@
     <!--    </insert>-->
 
     <select id="getUser" resultType="User">
-        SELECT id,name,age
+        SELECT *
         FROM USER
         WHERE ID = #{id}
     </select>

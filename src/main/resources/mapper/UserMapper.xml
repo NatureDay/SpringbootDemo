@@ -8,7 +8,7 @@
     <!--                #{price,jdbcType=DOUBLE})-->
     <!--    </insert>-->
 
-    <select id="getUser" parameterType="INTEGER" resultMap="User">
+    <select id="getUser" parameterType="INTEGER" resultType="User">
         SELECT *
         FROM user
         WHERE id = #{id}

@@ -12,12 +12,12 @@ public class LogUtil {
 
     private static Logger sLogger = LogManager.getLogger(DemoApplication.class);
 
-    public static void info(String msg) {
-        sLogger.info(msg);
-    }
-
     public static void debug(String msg) {
         sLogger.debug(msg);
+    }
+
+    public static void info(String msg) {
+        sLogger.info(msg);
     }
 
     public static void warn(String msg) {

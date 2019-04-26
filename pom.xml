@@ -56,23 +56,35 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 引入google guava -->
+        <!-- google guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>27.1-jre</version>
         </dependency>
-        <!-- 引入apache commons -->
+        <!-- apache commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
-        <!-- 引入fastjson -->
+        <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.56</version>
+        </dependency>
+        <!-- rxjava2 -->
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+        <!-- retrofit2 -->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>2.5.0</version>
         </dependency>
     </dependencies>
 

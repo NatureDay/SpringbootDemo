@@ -19,8 +19,8 @@ public class UserService {
         return userMapper.getUser(id);
     }
 
-    public User updateUser(User user) {
-        return userMapper.updateUser(user.getId());
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
     }
 
     public void deleteUser(int id) {

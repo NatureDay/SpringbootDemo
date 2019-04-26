@@ -3,8 +3,8 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
     <select id="insertUser" resultType="User">
-        INSERT INTO USER (id, name, age)
-        values (#{id}, #{name}, #{age})
+        INSERT INTO USER (name, age)
+        values (#{name}, #{age})
     </select>
 
     <select id="getUser" resultType="User">

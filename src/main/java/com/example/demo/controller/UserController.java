@@ -36,7 +36,6 @@ public class UserController {
         return ResultUtil.success(userService.getUser(ids));
     }
 
-
     @PostMapping("/add")
     public Result<User> addUser(@RequestBody JSONObject data) {
         User user = new User();
@@ -46,14 +45,18 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public Result<User> updateUser(@RequestBody User user) {
-        LogUtil.error("---------updateUser--------" + user);
-        return ResultUtil.success(userService.updateUser(user));
+    public Result<User> updateUser(@RequestBody JSONObject data) {
+        LogUtil.error("---------updateUser--------" + data);
+        User user = new User();
+        user.setId(data.getInteger("id"));
+        user.setName(data.getString("name"));
+        user.setAge(data.getInteger("age"));
+        return ResultUtil.success(null);
     }
 
-    @DeleteMapping("/delete")
-    public Result<User> deleteUser(@RequestBody User user) {
-        userService.deleteUser(user.getId());
+    @DeleteMapping("/delete/{id}")
+    public Result<User> deleteUser(@PathVariable int id) {
+        userService.deleteUser(id);
         return ResultUtil.success(null);
     }
 }

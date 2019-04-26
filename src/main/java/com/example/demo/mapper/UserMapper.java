@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    User insertUser(User uesr);
+    User insertUser(User user);
 
     User getUser(int id);
 
-    User updateUser(int id);
+    void updateUser(User user);
 
-    User deleteUser(int id);
+    void deleteUser(int id);
 
 }

@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public User updateUser(User user) {
-        return userMapper.getUser(user.getId());
+        return userMapper.updateUser(user.getId());
     }
 
     public void deleteUser(int id) {

@@ -4,10 +4,9 @@
 
 
     <select id="insertUser" resultType="User">
-
+        INSERT INTO USER (id, name, age)
+        values (#{id}, #{name}, #{age})
     </select>
-
-
 
     <select id="getUser" resultType="User">
         SELECT *
@@ -15,6 +14,18 @@
         WHERE ID = #{id}
     </select>
 
+    <update id="updateUser" parameterType="User">
+        UPDATE USER
+        SET name = #{name},
+            age  = #{age}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE
+        FROM USER
+        where id = #{id}
+    </delete>
 
 </mapper>
 

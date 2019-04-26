@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.base.Result;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -37,7 +38,10 @@ public class UserController {
 
 
     @PostMapping("/add")
-    public Result<User> addUser(@RequestBody User user) {
+    public Result<User> addUser(@RequestBody JSONObject data) {
+        User user = new User();
+        user.setName(data.getString("name"));
+        user.setAge(data.getInteger("age"));
         return ResultUtil.success(userService.insertUser(user));
     }
 

@@ -19,6 +19,10 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        authenticationToken.getPrincipal();
+
+
+
         return null;
     }
 }

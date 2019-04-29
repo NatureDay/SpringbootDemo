@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.base.CommonException;
 import com.example.demo.base.Result;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -28,6 +29,10 @@ public class UserController {
 
     @GetMapping("/query3/{id}")
     public Result<User> getUser3(@PathVariable int id) {
+        User user = userService.getUser(id);
+        if (user == null) {
+            throw CommonException.create(10000, "没查到此人啊");
+        }
         return ResultUtil.success(userService.getUser(id));
     }
 

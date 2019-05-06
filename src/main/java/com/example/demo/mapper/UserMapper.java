@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    User insertUser(User user);
+    void insertUser(User user);
 
     User getUser(int id);
 
@@ -14,4 +14,5 @@ public interface UserMapper {
 
     void deleteUser(int id);
 
+    User getUserByUsername(String userName);
 }

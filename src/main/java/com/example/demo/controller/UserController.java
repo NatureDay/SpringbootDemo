@@ -44,8 +44,8 @@ public class UserController {
     @PostMapping("/add")
     public Result<User> addUser(@RequestBody JSONObject data) {
         User user = new User();
-        user.setName(data.getString("name"));
-        user.setAge(data.getInteger("age"));
+//        user.setName(data.getString("name"));
+//        user.setAge(data.getInteger("age"));
         userService.insertUser(user);
         return ResultUtil.success(null);
     }
@@ -54,9 +54,9 @@ public class UserController {
     public Result<User> updateUser(@RequestBody JSONObject data) {
         LogUtil.error("---------updateUser--------" + data);
         User user = new User();
-        user.setId(data.getInteger("id"));
-        user.setName(data.getString("name"));
-        user.setAge(data.getInteger("age"));
+//        user.setId(data.getInteger("id"));
+//        user.setName(data.getString("name"));
+//        user.setAge(data.getInteger("age"));
         return ResultUtil.success(null);
     }
 

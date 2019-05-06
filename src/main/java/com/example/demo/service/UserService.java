@@ -11,8 +11,8 @@ public class UserService {
     @Autowired(required = false)
     private UserMapper userMapper;
 
-    public User insertUser(User user) {
-        return userMapper.insertUser(user);
+    public void insertUser(User user) {
+        userMapper.insertUser(user);
     }
 
     public User getUser(int id) {
@@ -26,4 +26,9 @@ public class UserService {
     public void deleteUser(int id) {
         userMapper.deleteUser(id);
     }
+
+    public User getUserByUsername(String userName) {
+        return userMapper.getUserByUsername(userName);
+    }
+
 }

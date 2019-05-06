@@ -46,7 +46,8 @@ public class UserController {
         User user = new User();
         user.setName(data.getString("name"));
         user.setAge(data.getInteger("age"));
-        return ResultUtil.success(userService.insertUser(user));
+        userService.insertUser(user);
+        return ResultUtil.success(null);
     }
 
     @PutMapping("/update")

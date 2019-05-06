@@ -1,5 +1,7 @@
 package com.example.demo.config;
 
+import com.example.demo.util.JsonUtil;
+import com.example.demo.util.LogUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,15 +16,13 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        LogUtil.info("--------doGetAuthorizationInfo----------" + JsonUtil.toJson(principalCollection));
         return null;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        authenticationToken.getPrincipal();
-
-
-
+        LogUtil.info("--------doGetAuthenticationInfo----------" + JsonUtil.toJson(authenticationToken));
         return null;
     }
 }

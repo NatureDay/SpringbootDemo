@@ -7,7 +7,9 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.ResultUtil;
 import com.google.common.base.Strings;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,10 @@ public class LoginController {
             subject.login(usernamePasswordToken);
         } catch (IncorrectCredentialsException e) {
             return ResultUtil.failure(101, "用户名密码错误");
+        } catch (UnknownAccountException e) {
+            return ResultUtil.failure(102, "用户名密码错误");
+        } catch (AuthenticationException e) {
+            return ResultUtil.failure(110, "登录失败");
         }
         return ResultUtil.success(null, "登陆成功");
     }

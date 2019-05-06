@@ -2,33 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
+    <parameterMap id="BaseParameterMap" type="User">
+
+    </parameterMap>
+
     <resultMap id="BaseResultMap" type="User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="insertUser">
-        INSERT INTO USER (name, age)
-        values (#{name}, #{age})
-    </select>
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user (name, password, token)
+        values (#{name}, #{password}, #{token})
+    </insert>
 
-    <select id="getUser" resultType="User">
+    <insert id="insertUsers" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user (name, password, token)
+        values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.name}, #{item.password}, #{item.token})
+        </foreach>
+    </insert>
+
+    <select id="queryUser" resultType="User">
         SELECT *
-        FROM USER
-        WHERE ID = #{id}
+        FROM t_user
+        WHERE id = #{id}
     </select>
 
     <update id="updateUser" parameterType="User">
-        UPDATE USER
-        SET name = #{name},
-            age  = #{age}
+        UPDATE t_user
+        SET name     = #{name},
+            password = #{password}
         WHERE id = #{id}
     </update>
 
     <delete id="deleteUser">
         DELETE
-        FROM USER
+        FROM t_user
         where id = #{id}
     </delete>
 

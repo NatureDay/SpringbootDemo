@@ -5,14 +5,16 @@ import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class UserService {
 
     @Autowired(required = false)
     private UserMapper userMapper;
 
-    public void insertUser(User user) {
-        userMapper.insertUser(user);
+    public void insertUser(Map<String, Object> params) {
+        userMapper.insertUser(params);
     }
 
     public User getUser(int id) {

@@ -10,6 +10,8 @@ import com.example.demo.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -42,11 +44,11 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public Result<User> addUser(@RequestBody JSONObject data) {
+    public Result<User> addUser(@RequestBody Map<String, Object> params) {
         User user = new User();
 //        user.setName(data.getString("name"));
 //        user.setAge(data.getInteger("age"));
-        userService.insertUser(user);
+        userService.insertUser(params);
         return ResultUtil.success(null);
     }
 

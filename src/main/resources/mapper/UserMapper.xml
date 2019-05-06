@@ -2,10 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
-    <parameterMap id="BaseParameterMap" type="User">
-
-    </parameterMap>
-
     <resultMap id="BaseResultMap" type="User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -14,15 +10,15 @@
     </resultMap>
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_user (name, password, token)
-        values (#{name}, #{password}, #{token})
+        INSERT INTO t_user (name, password)
+        values (#{userName}, #{password})
     </insert>
 
     <insert id="insertUsers" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_user (name, password, token)
+        INSERT INTO t_user (name, password)
         values
         <foreach item="item" collection="list" separator=",">
-            (#{item.name}, #{item.password}, #{item.token})
+            (#{item.name}, #{item.password})
         </foreach>
     </insert>
 

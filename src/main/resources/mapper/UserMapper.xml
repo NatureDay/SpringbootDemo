@@ -45,5 +45,11 @@
         where id = #{id}
     </delete>
 
+    <select id="getUserByUsername" resultType="User">
+        SELECT *
+        FROM t_user
+        WHERE name = #{userName}
+    </select>
+
 </mapper>
 

@@ -1,8 +1,13 @@
 package com.example.demo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * 用户
  */
+@Entity
+@Table(name = "t_user")
 public class User {
 
     private Integer id;

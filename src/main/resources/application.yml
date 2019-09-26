@@ -2,6 +2,7 @@
 #数据库配置
 #加上?serverTimezone=GMT%2B8" 即可  GMT%2B8代表： 东八区
 spring:
+  #数据库
   datasource:
     url: jdbc:mysql://localhost:3306/demo?serverTimezone=GMT%2B8
     username: root
@@ -12,6 +13,29 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: localhost
+    # Redis服务器连接端口
+    port: 6379
+    #连接超时时间
+    timeout: 20s
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接池配置，2.0中直接使用jedis或者lettuce配置连接池
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
 
 #加载MyBatis配置文件
 mybatis:

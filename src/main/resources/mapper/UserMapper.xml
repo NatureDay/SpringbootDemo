@@ -27,9 +27,9 @@
 
     <update id="updateUser" parameterType="User">
         UPDATE t_user
-        SET name     = #{name},
+        SET name = #{name},
             age = #{age},
-            address     = #{address},
+            address = #{address},
             update_time = NOW()
         WHERE id = #{id}
     </update>

@@ -75,7 +75,10 @@ public class UserController {
         user.setId(id);
         user.setName((String) params.get("name"));
         user.setAddress((String) params.get("address"));
-        user.setAge(Integer.valueOf((String) params.get("age")));
+        String age = (String) params.get("age");
+        if (!Strings.isNullOrEmpty(age)) {
+            user.setAge(Integer.valueOf(age));
+        }
         userService.updateUser(user);
         return ResultUtil.success(null);
     }

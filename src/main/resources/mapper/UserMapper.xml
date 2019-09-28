@@ -27,11 +27,19 @@
 
     <update id="updateUser" parameterType="User">
         UPDATE t_user
-        SET name = #{name},
-            age = #{age},
-            address = #{address},
+        <set>
+            <if test="name!=null">name = #{name},</if>
+            <if test="age!=null">age = #{age},</if>
+            <if test="address!=null">address = #{address},</if>
             update_time = NOW()
+        </set>
         WHERE id = #{id}
+        -- UPDATE t_user
+        -- SET name = #{name},
+        -- age = #{age},
+        -- address = #{address},
+        -- update_time = NOW()
+        -- WHERE id = #{id}
     </update>
 
     <delete id="deleteUserById">

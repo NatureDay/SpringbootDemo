@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.mapper.UserMapper;
-import com.example.demo.model.User;
+import com.example.demo.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +17,19 @@ public class UserService {
         userMapper.insertUser(params);
     }
 
-    public User getUser(int id) {
+    public UserEntity getUser(int id) {
         return userMapper.getUser(id);
     }
 
-    public void updateUser(User user) {
-        userMapper.updateUser(user);
+    public void updateUser(UserEntity userEntity) {
+        userMapper.updateUser(userEntity);
     }
 
     public void deleteUser(int id) {
         userMapper.deleteUser(id);
     }
 
-    public User getUserByUsername(String userName) {
+    public UserEntity getUserByUsername(String userName) {
         return userMapper.getUserByUsername(userName);
     }
 

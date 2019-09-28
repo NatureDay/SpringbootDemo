@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.base.CommonException;
-import com.example.demo.model.User;
+import com.example.demo.model.UserEntity;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JsonUtil;
 import com.example.demo.util.LogUtil;
@@ -65,9 +65,9 @@ public class ShiroRealm extends AuthorizingRealm {
         // 1.从主体传过来的认证信息中获得用户名
         String userName = (String) authenticationToken.getPrincipal();
         // 2.通过用户名到数据库获得凭证
-        User user = userService.getUserByUsername(userName);
-        if (user == null) throw CommonException.create(666, "未找到此用户");
-        return new SimpleAuthenticationInfo(user.getName(), user.getPassword(), getName());
+        UserEntity userEntity = userService.getUserByUsername(userName);
+        if (userEntity == null) throw CommonException.create(666, "未找到此用户");
+        return new SimpleAuthenticationInfo(userEntity.getName(), userEntity.getPassword(), getName());
     }
 
 }

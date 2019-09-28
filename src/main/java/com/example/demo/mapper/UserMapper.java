@@ -1,6 +1,6 @@
 package com.example.demo.mapper;
 
-import com.example.demo.model.User;
+import com.example.demo.model.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;
@@ -10,11 +10,11 @@ public interface UserMapper {
 
     void insertUser(Map<String, Object> params);
 
-    User getUser(int id);
+    UserEntity getUser(int id);
 
-    void updateUser(User user);
+    void updateUser(UserEntity userEntity);
 
     void deleteUser(int id);
 
-    User getUserByUsername(String userName);
+    UserEntity getUserByUsername(String userName);
 }

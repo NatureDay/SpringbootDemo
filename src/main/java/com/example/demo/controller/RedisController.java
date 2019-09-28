@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
+import com.example.demo.model.UserEntity;
 import com.example.demo.util.RedisUtil;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ public class RedisController {
 
     @RequestMapping("/set")
     public boolean redisset(@RequestParam String name) {
-        User userEntity = new User();
+        UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
         userEntity.setName("张三");
         userEntity.setCreateTime(new Date());
@@ -32,8 +31,8 @@ public class RedisController {
     }
 
     @RequestMapping("/get")
-    public User redisget(@RequestParam String name) {
-        return (User) redisUtil.get(name);
+    public UserEntity redisget(@RequestParam String name) {
+        return (UserEntity) redisUtil.get(name);
     }
 
     @RequestMapping("/expire")

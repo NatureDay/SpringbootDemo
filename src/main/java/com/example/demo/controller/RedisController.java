@@ -21,7 +21,7 @@ public class RedisController {
     @RequestMapping("/set")
     public boolean redisset(@RequestParam String name) {
         User user = new User();
-        user.setId(1L);
+        user.setId(1);
         user.setName("张三");
         user.setCreateTime(new Date());
 

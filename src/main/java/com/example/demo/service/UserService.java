@@ -22,23 +22,23 @@ public class UserService implements UserMapper {
     }
 
     @Override
-    public List<User> queryAllUser() {
-        return null;
+    public User queryUserById(Integer id) {
+        return userMapper.queryUserById(id);
     }
 
     @Override
-    public User queryUserById(Integer id) {
-        return null;
+    public List<User> queryAllUser() {
+        return userMapper.queryAllUser();
     }
 
     @Override
     public void updateUser(User user) {
-
+        userMapper.updateUser(user);
     }
 
     @Override
     public void deleteUserById(Integer id) {
-
+        userMapper.deleteUserById(id);
     }
 
 }

@@ -14,6 +14,38 @@
         values (#{account}, #{password},#{name},#{age},#{address},NOW())
     </insert>
 
+    <select id="queryUserById" resultType="User">
+        SELECT *
+        FROM t_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryAllUser" resultType="User">
+        SELECT *
+        FROM t_user
+    </select>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE t_user
+        SET name     = #{name},
+            age = #{age},
+            address     = #{address},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUserById">
+        DELETE
+        FROM t_user
+        where id = #{id}
+    </delete>
+
+    <!--    <select id="queryUser" resultType="User">-->
+    <!--        SELECT *-->
+    <!--        FROM t_user-->
+    <!--        WHERE id = #{id}-->
+    <!--    </select>-->
+
     <!--    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">-->
     <!--        INSERT INTO t_user (name, password)-->
     <!--        values (#{userName}, #{password})-->

@@ -19,7 +19,6 @@ public class ResultUtil {
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
         result.setCode(RESULT_SUCCESS);
-        result.setMessage("");
         result.setData(data);
         return result;
     }

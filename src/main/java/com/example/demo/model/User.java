@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class User {
 
-    private Long id;
+    private Integer id;
 
     private String account;
     private String password;
@@ -17,11 +17,11 @@ public class User {
     private Date createTime;
     private Date updateTime;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

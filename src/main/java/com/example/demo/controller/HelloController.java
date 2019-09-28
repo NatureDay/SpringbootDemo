@@ -34,7 +34,7 @@ public class HelloController {
     @RequestMapping("/getUser")
     public User getUser() {
         User user = new User();
-        user.setId(1L);
+        user.setId(1);
         user.setName("aaa");
         return user;
     }

@@ -24,48 +24,48 @@ import java.util.Map;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
-
-    @PostMapping
-    public Result<User> login(@RequestBody Map<String, Object> params) {
-        String userName = (String) params.get("userName");
-        String password = (String) params.get("password");
-        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
-            throw CommonException.create(111, "用户名密码不能为空");
-
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName, password);
-        Subject subject = SecurityUtils.getSubject();
-        try {
-            subject.login(usernamePasswordToken);
-        } catch (IncorrectCredentialsException e) {
-            return ResultUtil.failure(101, "用户名密码错误");
-        } catch (UnknownAccountException e) {
-            return ResultUtil.failure(102, "用户名密码错误");
-        } catch (AuthenticationException e) {
-            return ResultUtil.failure(110, "登录失败");
-        }
-        return ResultUtil.success(null, "登陆成功");
-    }
-
-    @PostMapping("/register")
-    public Result<User> register(@RequestBody Map<String, Object> params) {
-        String userName = (String) params.get("userName");
-        String password = (String) params.get("password");
-        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
-            throw CommonException.create(111, "用户名密码不能为空");
-        userService.insertUser(params);
-        return ResultUtil.success(null, "注册成功");
-    }
-
-    @PostMapping("/logout")
-    public Result<User> logout(@RequestBody Map<String, Object> params) {
-        String userName = (String) params.get("userName");
-        String password = (String) params.get("password");
-        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
-            throw CommonException.create(111, "用户名密码不能为空");
-
-        return ResultUtil.success(null, "登出成功");
-    }
+//    @Autowired
+//    private UserService userService;
+//
+//    @PostMapping
+//    public Result<User> login(@RequestBody Map<String, Object> params) {
+//        String userName = (String) params.get("userName");
+//        String password = (String) params.get("password");
+//        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
+//            throw CommonException.create(111, "用户名密码不能为空");
+//
+//        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName, password);
+//        Subject subject = SecurityUtils.getSubject();
+//        try {
+//            subject.login(usernamePasswordToken);
+//        } catch (IncorrectCredentialsException e) {
+//            return ResultUtil.failure(101, "用户名密码错误");
+//        } catch (UnknownAccountException e) {
+//            return ResultUtil.failure(102, "用户名密码错误");
+//        } catch (AuthenticationException e) {
+//            return ResultUtil.failure(110, "登录失败");
+//        }
+//        return ResultUtil.success(null, "登陆成功");
+//    }
+//
+//    @PostMapping("/register")
+//    public Result<User> register(@RequestBody Map<String, Object> params) {
+//        String userName = (String) params.get("userName");
+//        String password = (String) params.get("password");
+//        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
+//            throw CommonException.create(111, "用户名密码不能为空");
+//        userService.insertUser(params);
+//        return ResultUtil.success(null, "注册成功");
+//    }
+//
+//    @PostMapping("/logout")
+//    public Result<User> logout(@RequestBody Map<String, Object> params) {
+//        String userName = (String) params.get("userName");
+//        String password = (String) params.get("password");
+//        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
+//            throw CommonException.create(111, "用户名密码不能为空");
+//
+//        return ResultUtil.success(null, "登出成功");
+//    }
 
 }

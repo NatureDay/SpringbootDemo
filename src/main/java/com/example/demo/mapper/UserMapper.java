@@ -1,20 +1,49 @@
 package com.example.demo.mapper;
 
-import com.example.demo.model.UserEntity;
+import com.example.demo.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Map;
+import java.util.List;
 
+/**
+ * dao层
+ */
 @Mapper
 public interface UserMapper {
 
-    void insertUser(Map<String, Object> params);
+    /**
+     * 新增用户信息
+     *
+     * @param user
+     */
+    void insertUser(User user);
 
-    UserEntity getUser(int id);
+    /**
+     * 查询所有用户信息
+     *
+     * @return
+     */
+    List<User> queryAllUser();
 
-    void updateUser(UserEntity userEntity);
+    /**
+     * 根据Id查询用户信息
+     *
+     * @param id
+     * @return
+     */
+    User queryUserById(Integer id);
 
-    void deleteUser(int id);
+    /**
+     * 根据id更新用户信息
+     *
+     * @param user
+     */
+    void updateUser(User user);
 
-    UserEntity getUserByUsername(String userName);
+    /**
+     * 根据id删除用户信息
+     *
+     * @param id
+     */
+    void deleteUserById(Integer id);
 }

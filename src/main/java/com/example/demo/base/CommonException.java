@@ -5,6 +5,10 @@ package com.example.demo.base;
  */
 public class CommonException extends RuntimeException {
 
+    public static CommonException create(String message) {
+        return new CommonException(-1, message);
+    }
+
     public static CommonException create(int code, String message) {
         return new CommonException(code, message);
     }

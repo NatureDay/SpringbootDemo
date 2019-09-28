@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.UserEntity;
+import com.example.demo.model.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +32,11 @@ public class HelloController {
     }
 
     @RequestMapping("/getUser")
-    public UserEntity getUser() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(1L);
-        userEntity.setName("aaa");
-        return userEntity;
+    public User getUser() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("aaa");
+        return user;
     }
 
 }

@@ -1,36 +1,44 @@
 package com.example.demo.service;
 
 import com.example.demo.mapper.UserMapper;
-import com.example.demo.model.UserEntity;
+import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
+/**
+ * 业务层实现
+ */
 @Service
-public class UserService {
+public class UserService implements UserMapper {
 
-    @Autowired(required = false)
+    @Autowired
     private UserMapper userMapper;
 
-    public void insertUser(Map<String, Object> params) {
-        userMapper.insertUser(params);
+    @Override
+    public void insertUser(User user) {
+        userMapper.insertUser(user);
     }
 
-    public UserEntity getUser(int id) {
-        return userMapper.getUser(id);
+    @Override
+    public List<User> queryAllUser() {
+        return null;
     }
 
-    public void updateUser(UserEntity userEntity) {
-        userMapper.updateUser(userEntity);
+    @Override
+    public User queryUserById(Integer id) {
+        return null;
     }
 
-    public void deleteUser(int id) {
-        userMapper.deleteUser(id);
+    @Override
+    public void updateUser(User user) {
+
     }
 
-    public UserEntity getUserByUsername(String userName) {
-        return userMapper.getUserByUsername(userName);
+    @Override
+    public void deleteUserById(Integer id) {
+
     }
 
 }

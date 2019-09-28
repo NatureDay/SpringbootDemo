@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * 用户
  */
-public class UserEntity {
+public class User {
 
     private Long id;
 
@@ -15,6 +15,7 @@ public class UserEntity {
     private Integer age;
     private String address;
     private Date createTime;
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -70,5 +71,13 @@ public class UserEntity {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

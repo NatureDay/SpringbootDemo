@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.UserEntity;
+import com.example.demo.model.User;
 import com.example.demo.util.RedisUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,19 +20,19 @@ public class RedisController {
 
     @RequestMapping("/set")
     public boolean redisset(@RequestParam String name) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(1L);
-        userEntity.setName("张三");
-        userEntity.setCreateTime(new Date());
+        User user = new User();
+        user.setId(1L);
+        user.setName("张三");
+        user.setCreateTime(new Date());
 
-        //return redisUtil.set(key,userEntity,ExpireTime);
+        //return redisUtil.set(key,user,ExpireTime);
 
-        return redisUtil.set(name, userEntity);
+        return redisUtil.set(name, user);
     }
 
     @RequestMapping("/get")
-    public UserEntity redisget(@RequestParam String name) {
-        return (UserEntity) redisUtil.get(name);
+    public User redisget(@RequestParam String name) {
+        return (User) redisUtil.get(name);
     }
 
     @RequestMapping("/expire")

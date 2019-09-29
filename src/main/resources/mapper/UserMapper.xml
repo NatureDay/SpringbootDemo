@@ -25,6 +25,12 @@
         FROM t_user
     </select>
 
+    <select id="queryUserByAccount" resultType="User">
+        SELECT *
+        FROM t_user
+        WHERE account = #{account}
+    </select>
+
     <update id="updateUser">
         UPDATE t_user
         <set>

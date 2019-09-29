@@ -27,6 +27,11 @@ public class UserService implements UserMapper {
     }
 
     @Override
+    public User queryUserByAccount(String account) {
+        return userMapper.queryUserByAccount(account);
+    }
+
+    @Override
     public List<User> queryAllUser() {
         return userMapper.queryAllUser();
     }

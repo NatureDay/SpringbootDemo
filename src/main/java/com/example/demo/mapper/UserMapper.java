@@ -34,6 +34,14 @@ public interface UserMapper {
     User queryUserById(Integer id);
 
     /**
+     * 根据账户名查询用户信息
+     *
+     * @param account
+     * @return
+     */
+    User queryUserByAccount(String account);
+
+    /**
      * 根据id更新用户信息
      *
      * @param user

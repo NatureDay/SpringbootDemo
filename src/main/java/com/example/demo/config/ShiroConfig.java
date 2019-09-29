@@ -44,31 +44,31 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-//    @Bean
-//    public ShiroRealm shiroRealm() {
-//        return new ShiroRealm();
-//    }
-//
-//    @Bean
-//    public SecurityManager securityManager() {
-//        DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
-//        defaultSecurityManager.setRealm(shiroRealm());
-//        return defaultSecurityManager;
-//    }
-//
-//    @Bean
-//    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
-//        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-//        shiroFilterFactoryBean.setSecurityManager(securityManager);
-//
-//        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//
-//        filterChainDefinitionMap.put("/login", "anon");
-//        filterChainDefinitionMap.put("/user/*", "authc");
-//        filterChainDefinitionMap.put("/user/update", "roles[user]");
-//        filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
-//        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-//        return shiroFilterFactoryBean;
-//    }
+    @Bean
+    public ShiroRealm shiroRealm() {
+        return new ShiroRealm();
+    }
+
+    @Bean
+    public SecurityManager securityManager() {
+        DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
+        defaultSecurityManager.setRealm(shiroRealm());
+        return defaultSecurityManager;
+    }
+
+    @Bean
+    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/user/*", "authc");
+        filterChainDefinitionMap.put("/user/update", "roles[user]");
+        filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        return shiroFilterFactoryBean;
+    }
 
 }

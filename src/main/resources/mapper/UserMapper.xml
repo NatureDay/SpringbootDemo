@@ -17,10 +17,11 @@
     <select id="queryUserById" resultType="User">
         select *
         from t_user
-        left join t_user_role on t_user.id=t_user_role.u_id
-        left join t_role on t_user_role.r_id=t_role.r_id
-        left join t_role_permission on t_user_role.r_id=t_role_permission.r_id
-        left join t_permission on t_permission.p_id=t_role_permission.p_id
+        left join t_user_role on t_user_role.u_id = t_user.id
+        left join t_role on t_role.r_id = t_user_role.r_id
+        left join t_role_permission on t_role_permission.r_id = t_role.r_id
+        left join t_permission on t_permission.p_id = t_role_permission.r_id
+        where t_user.id = #{id}
     </select>
 
     <select id="queryAllUser" resultType="User">

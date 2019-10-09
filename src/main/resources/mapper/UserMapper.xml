@@ -51,9 +51,15 @@
         where t_user.id = #{id}
     </select>
 
-    <select id="queryAllUser" resultType="User">
-        SELECT *
-        FROM t_user
+    <select id="queryAllUser" resultMap="userResultMap">
+        select t_user.id,t_user.account,t_user.name,t_user.address,t_user.age,t_user.create_time,t_user.update_time,
+        t_role.r_id,t_role.name role_name,t_role.description role_description,
+        t_permission.p_id,t_permission.name per_name,t_permission.description per_description
+        from t_user
+        left join t_user_role on t_user_role.u_id = t_user.id
+        left join t_role on t_role.r_id = t_user_role.r_id
+        left join t_role_permission on t_role_permission.r_id = t_role.r_id
+        left join t_permission on t_permission.p_id = t_role_permission.p_id
     </select>
 
     <select id="queryUserByAccount" resultType="User">

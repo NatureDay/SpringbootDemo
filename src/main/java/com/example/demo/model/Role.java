@@ -6,7 +6,8 @@ package com.example.demo.model;
 public class Role {
 
     private Integer id;
-    private String rolaName;
+    private String roleName;
+    private String description;
 
     public Integer getId() {
         return id;
@@ -16,11 +17,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getRolaName() {
-        return rolaName;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolaName(String rolaName) {
-        this.rolaName = rolaName;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

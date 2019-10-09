@@ -7,6 +7,7 @@ public class Permission {
 
     private Integer id;
     private String perName;
+    private String description;
 
     public Integer getId() {
         return id;
@@ -22,5 +23,13 @@ public class Permission {
 
     public void setPerName(String perName) {
         this.perName = perName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户
@@ -16,6 +17,9 @@ public class User {
     private String address;
     private Date createTime;
     private Date updateTime;
+
+    private Role role;
+    private List<Permission> permissions;
 
     public Integer getId() {
         return id;
@@ -79,5 +83,21 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 }

@@ -5,10 +5,14 @@ import com.example.demo.base.Result;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.ResultUtil;
+import com.google.common.base.Function;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +65,25 @@ public class UserController {
     @GetMapping("/queryAll")
     public Result<List<User>> queryAllUser() {
         return ResultUtil.success(userService.queryAllUser());
+    }
+
+    /**
+     * 根据传入的权限ID来查询拥有权限的用户
+     *
+     * @return
+     */
+    @GetMapping("/queryUsersByPermission")
+    public Result<List<User>> queryUsersByPermission(@RequestParam Map<String, Object> params) {
+        String pIds = (String) params.get("pIds");
+        List<String> pIdss = Arrays.asList(pIds.split(","));
+        List<Integer> ids = Lists.transform(pIdss, new Function<String, Integer>() {
+            @Nullable
+            @Override
+            public Integer apply(@Nullable String input) {
+                return Integer.valueOf(input);
+            }
+        });
+        return ResultUtil.success(userService.queryUsersByPermissions(ids));
     }
 
     /**

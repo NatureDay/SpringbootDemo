@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -54,4 +55,11 @@ public interface UserMapper {
      * @param id
      */
     void deleteUserById(Integer id);
+
+    /**
+     * 根据传入的权限ID来查询拥有权限的用户
+     *
+     * @param ids
+     */
+    List<User> queryUsersByPermissions(@Param("ids") List<Integer> ids);
 }

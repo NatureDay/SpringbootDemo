@@ -46,4 +46,9 @@ public class UserService implements UserMapper {
         userMapper.deleteUserById(id);
     }
 
+    @Override
+    public List<User> queryUsersByPermissions(List<Integer> ids) {
+        return userMapper.queryUsersByPermissions(ids);
+    }
+
 }

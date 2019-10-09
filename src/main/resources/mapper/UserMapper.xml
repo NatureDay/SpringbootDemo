@@ -21,6 +21,10 @@
             <result property="perName" column="per_name"/>
             <result property="description" column="per_description"/>
         </collection>
+        <!-- 鉴别器 -->
+<!--        <discriminator javaType="int" column="age">-->
+<!--            <case value=""></case>-->
+<!--        </discriminator>-->
     </resultMap>
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="User">

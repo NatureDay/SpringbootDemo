@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.base.CommonException;
+import com.example.demo.model.Permission;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JsonUtil;
@@ -16,6 +17,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -45,8 +47,9 @@ public class ShiroRealm extends AuthorizingRealm {
         /**
          * 从数据库或缓存中获取角色权限
          */
-        Set<String> roles = getRolesByUserName(account);
-        Set<String> permissions = getPermissionsByUserName(account);
+        User user = userService.queryUserByAccount(account);
+        Set<String> roles = getRolesByAccount(user);
+        Set<String> permissions = getPermissionsByAccount(user);
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.setRoles(roles);
@@ -54,18 +57,29 @@ public class ShiroRealm extends AuthorizingRealm {
         return simpleAuthorizationInfo;
     }
 
-    private Set<String> getRolesByUserName(String userName) {
-        Set<String> roles = new HashSet<>();
-        roles.add("admin");
-        roles.add("user");
-        return roles;
+    private Set<String> getRolesByAccount(User user) {
+        if (user != null) {
+            if (user.getRole() != null) {
+                Set<String> roles = new HashSet<>();
+                roles.add(user.getRole().getRoleName());
+                return roles;
+            }
+        }
+        return null;
     }
 
-    private Set<String> getPermissionsByUserName(String userName) {
-        Set<String> roles = new HashSet<>();
-        roles.add("user:delete");
-        roles.add("user:add");
-        return roles;
+    private Set<String> getPermissionsByAccount(User user) {
+        if (user != null) {
+            List<Permission> permissions = user.getPermissions();
+            if (user.getPermissions() != null) {
+                Set<String> pers = new HashSet<>();
+                for (Permission permission : permissions) {
+                    pers.add(permission.getPerName());
+                }
+                return pers;
+            }
+        }
+        return null;
     }
 
     /**
@@ -83,7 +97,7 @@ public class ShiroRealm extends AuthorizingRealm {
         // 2.通过用户名到数据库获得凭证
         User user = userService.queryUserByAccount(account);
         if (user == null) throw CommonException.create(666, "未找到此用户");
-        return new SimpleAuthenticationInfo(user.getName(), user.getPassword(), getName());
+        return new SimpleAuthenticationInfo(user.getAccount(), user.getPassword(), getName());
     }
 
 }

@@ -68,6 +68,7 @@ public class ShiroConfig {
 
         filterChainDefinitionMap.put("/user/update", "roles[user]");
         filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

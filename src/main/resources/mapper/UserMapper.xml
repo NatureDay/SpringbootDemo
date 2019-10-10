@@ -61,6 +61,11 @@
         where t_user.id = #{id}
     </select>
 
+    <select id="queryUserByAccount" resultMap="userResultMap">
+        <include refid="selectUser"/>
+        where t_user.account = #{account}
+    </select>
+
     <select id="queryAllUser" resultMap="userResultMap">
         <include refid="selectUser"/>
     </select>

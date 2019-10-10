@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/authc")
 public class LoginController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/login")
     public Result<User> login(@RequestBody Map<String, Object> params) {
         String account = (String) params.get("account");
         String password = (String) params.get("password");

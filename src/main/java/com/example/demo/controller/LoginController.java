@@ -73,4 +73,9 @@ public class LoginController {
         return ResultUtil.success(null, "登出成功");
     }
 
+    @GetMapping("/unauthorized")
+    public Result<User> unauthorized() {
+        throw CommonException.create(401, "权限不住");
+    }
+
 }

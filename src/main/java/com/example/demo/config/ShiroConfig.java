@@ -64,11 +64,16 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/unauthorized", "anon");
+
         filterChainDefinitionMap.put("/user/*", "authc");
 
         filterChainDefinitionMap.put("/user/update", "roles[user]");
         filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
 
+        // 未授权界面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

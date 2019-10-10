@@ -64,7 +64,8 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/user/*", "anon");
+        filterChainDefinitionMap.put("/user/*", "authc");
+
         filterChainDefinitionMap.put("/user/update", "roles[user]");
         filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

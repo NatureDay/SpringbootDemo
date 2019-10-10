@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,11 @@ public class UserService implements UserMapper {
     @Override
     public List<User> queryUsersByPermissions(List<Integer> ids) {
         return userMapper.queryUsersByPermissions(ids);
+    }
+
+    @Override
+    public Role queryRole(Integer id) {
+        return userMapper.queryRole(id);
     }
 
 }

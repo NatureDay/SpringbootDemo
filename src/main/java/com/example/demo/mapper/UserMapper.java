@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -62,4 +63,12 @@ public interface UserMapper {
      * @param ids
      */
     List<User> queryUsersByPermissions(@Param("ids") List<Integer> ids);
+
+
+    /**
+     * 根据ID来查询角色
+     *
+     * @param id
+     */
+    Role queryRole(Integer id);
 }

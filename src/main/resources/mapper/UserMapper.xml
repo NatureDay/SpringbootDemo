@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
+    <!-- 构造user查询返回结果 -->
     <resultMap id="userResultMap" type="User">
         <id property="id" column="id"/>
         <result property="account" column="account"/>
@@ -27,6 +28,7 @@
         <!--        </discriminator>-->
     </resultMap>
 
+    <!-- 插入用户 -->
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="User">
         INSERT INTO t_user (account,password,name,age,address,create_time)
         values (#{account}, #{password},#{name},#{age},#{address},NOW())
@@ -68,6 +70,12 @@
         <foreach collection="ids" item="item" open="where t_permission.p_id in(" close=")" separator=",">
             #{item}
         </foreach>
+    </select>
+
+    <select id="queryRole" resultMap="Role">
+        select *
+        from t_role
+        where t_role.r_id = #{id}
     </select>
 
     <!--    <select id="queryUserById" resultMap="userResultMap">-->

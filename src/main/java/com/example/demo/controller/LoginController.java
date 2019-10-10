@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.base.CommonException;
 import com.example.demo.base.Result;
+import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.ResultUtil;
@@ -57,13 +58,18 @@ public class LoginController {
         User user = new User();
         user.setAccount(account);
         user.setPassword(pwd);
+
+        /**
+         * 为用户设定默认角色——游客
+         */
+        user.setRole(userService.queryRole(2));
         userService.insertUser(user);
         return ResultUtil.success(null, "注册成功");
     }
 
     @PostMapping("/logout")
     public Result<User> logout(@RequestBody Map<String, Object> params) {
-        String userName = (String) params.get("userName");
+        String userName = (String) params.get("account");
         String password = (String) params.get("password");
         if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
             throw CommonException.create(111, "用户名密码不能为空");

@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
 import com.example.demo.filter.JwtFilter;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -56,6 +58,16 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
         defaultSecurityManager.setRealm(shiroRealm());
+
+        /**
+         * 关闭shiro自带的session
+         */
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
+        defaultSecurityManager.setSubjectDAO(subjectDAO);
+
         return defaultSecurityManager;
     }
 
@@ -67,13 +79,10 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
         filterChainDefinitionMap.put("/authc/*", "anon");
-        filterChainDefinitionMap.put("/unauthorized", "anon");
-
         filterChainDefinitionMap.put("/user/*", "authc");
 
         filterChainDefinitionMap.put("/user/update", "roles[user]");
         filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
-
 
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>();

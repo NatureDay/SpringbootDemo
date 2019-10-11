@@ -4,6 +4,7 @@ import com.example.demo.base.CommonException;
 import com.example.demo.base.Result;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import com.example.demo.util.JwtUtil;
 import com.example.demo.util.ResultUtil;
 import com.google.common.base.Strings;
 import org.apache.shiro.SecurityUtils;
@@ -15,6 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -25,24 +27,33 @@ public class LoginController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Result<User> login(@RequestBody Map<String, Object> params) {
+    public Result<Map> login(@RequestBody Map<String, Object> params) {
         String account = (String) params.get("account");
         String password = (String) params.get("password");
         if (Strings.isNullOrEmpty(account) || Strings.isNullOrEmpty(password))
             throw CommonException.create(111, "用户名密码不能为空");
+        /**
+         * 配合UsernamePasswordToken
+         */
+//        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(account, password);
+//        Subject subject = SecurityUtils.getSubject();
+//        try {
+//            subject.login(usernamePasswordToken);
+//        } catch (IncorrectCredentialsException e) {
+//            return ResultUtil.failure(101, "用户名密码错误");
+//        } catch (UnknownAccountException e) {
+//            return ResultUtil.failure(102, "用户名密码错误");
+//        } catch (AuthenticationException e) {
+//            return ResultUtil.failure(110, "登录失败");
+//        }
 
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(account, password);
-        Subject subject = SecurityUtils.getSubject();
-        try {
-            subject.login(usernamePasswordToken);
-        } catch (IncorrectCredentialsException e) {
-            return ResultUtil.failure(101, "用户名密码错误");
-        } catch (UnknownAccountException e) {
-            return ResultUtil.failure(102, "用户名密码错误");
-        } catch (AuthenticationException e) {
-            return ResultUtil.failure(110, "登录失败");
-        }
-        return ResultUtil.success(null, "登陆成功");
+        /**
+         * 配合JwtToken
+         */
+        String token = JwtUtil.sign(account, password);
+        Map<String, Object> data = new HashMap<>();
+        data.put("token", token);
+        return ResultUtil.success(data, "登陆成功");
     }
 
     @PostMapping("/register")

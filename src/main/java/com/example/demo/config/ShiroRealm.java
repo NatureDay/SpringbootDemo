@@ -5,7 +5,9 @@ import com.example.demo.model.Permission;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JsonUtil;
+import com.example.demo.util.JwtUtil;
 import com.example.demo.util.LogUtil;
+import com.google.common.base.Strings;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -28,8 +30,8 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     public boolean supports(AuthenticationToken token) {
-//        return token instanceof JwtToken;
-        return token instanceof UsernamePasswordToken;
+//        return token instanceof UsernamePasswordToken;
+        return token instanceof JwtToken;
     }
 
     /**
@@ -90,12 +92,28 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         LogUtil.info("--------doGetAuthenticationInfo----------" + JsonUtil.toJson(authenticationToken));
-        // 1.从主体传过来的认证信息中获得用户名
-        String account = (String) authenticationToken.getPrincipal();
-        // 2.通过用户名到数据库获得凭证
+
+        /**
+         * 配合UsernamePasswordToken
+         */
+//        // 1.从主体传过来的认证信息中获得用户名
+//        String account = (String) authenticationToken.getPrincipal();
+//        // 2.通过用户名到数据库获得凭证
+//        User user = userService.queryUserByAccount(account);
+//        if (user == null) throw CommonException.create(666, "未找到此用户");
+//        return new SimpleAuthenticationInfo(user.getAccount(), user.getPassword(), getName());
+
+        /**
+         * 配合JwtToken
+         */
+        String token = (String) authenticationToken.getCredentials();
+//        account，用于和数据库进行对比
+        String account = JwtUtil.getAccount(token);
+        if (Strings.isNullOrEmpty(account)) throw CommonException.create("token无效");
         User user = userService.queryUserByAccount(account);
-        if (user == null) throw CommonException.create(666, "未找到此用户");
-        return new SimpleAuthenticationInfo(user.getAccount(), user.getPassword(), getName());
+        if (user == null) throw CommonException.create("未找到此用户");
+        if (!JwtUtil.verify(token, account, user.getPassword())) throw CommonException.create("用户名或密码错误");
+        return new SimpleAuthenticationInfo(token, token, getName());
     }
 
 }

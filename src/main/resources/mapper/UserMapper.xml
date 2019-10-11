@@ -72,7 +72,7 @@
         </foreach>
     </select>
 
-    <select id="queryRole" resultMap="Role">
+    <select id="queryRole" resultType="Role">
         select *
         from t_role
         where t_role.r_id = #{id}

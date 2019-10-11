@@ -6,10 +6,7 @@ import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JsonUtil;
 import com.example.demo.util.LogUtil;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -31,7 +28,8 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof JwtToken;
+//        return token instanceof JwtToken;
+        return token instanceof UsernamePasswordToken;
     }
 
     /**

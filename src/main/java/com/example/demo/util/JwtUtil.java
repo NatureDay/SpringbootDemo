@@ -15,6 +15,9 @@ public class JwtUtil {
 
     private static final long EXPIRE_TIME = 5 * 60 * 1000;
 
+    private static final String KEY_CLAIM = "account";
+
+
     /**
      * 校验token是否正确
      *
@@ -22,12 +25,12 @@ public class JwtUtil {
      * @param secret 用户的密码
      * @return 是否正确
      */
-    public static boolean verify(String token, String username, String secret) {
+    public static boolean verify(String token, String account, String secret) {
         try {
             //根据密码生成JWT效验器
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("username", username)
+                    .withClaim(KEY_CLAIM, account)
                     .build();
             //效验TOKEN
             DecodedJWT jwt = verifier.verify(token);
@@ -42,10 +45,10 @@ public class JwtUtil {
      *
      * @return token中包含的用户名
      */
-    public static String getUsername(String token) {
+    public static String getAccount(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("username").asString();
+            return jwt.getClaim(KEY_CLAIM).asString();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -54,16 +57,16 @@ public class JwtUtil {
     /**
      * 生成签名,5min后过期
      *
-     * @param username 用户名
+     * @param account 用户名
      * @param secret   用户的密码
      * @return 加密的token
      */
-    public static String sign(String username, String secret) {
+    public static String sign(String account, String secret) {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         Algorithm algorithm = Algorithm.HMAC256(secret);
-        // 附带username信息
+        // 附带account信息
         return JWT.create()
-                .withClaim("username", username)
+                .withClaim(KEY_CLAIM, account)
                 .withExpiresAt(date)
                 .sign(algorithm);
 

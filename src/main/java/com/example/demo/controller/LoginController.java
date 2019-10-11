@@ -63,13 +63,10 @@ public class LoginController {
         return ResultUtil.success(null, "注册成功");
     }
 
-    @PostMapping("/logout")
-    public Result<User> logout(@RequestBody Map<String, Object> params) {
-        String userName = (String) params.get("account");
-        String password = (String) params.get("password");
-        if (Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password))
-            throw CommonException.create(111, "用户名密码不能为空");
-
+    @GetMapping("/logout")
+    public Result<User> logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         return ResultUtil.success(null, "登出成功");
     }
 

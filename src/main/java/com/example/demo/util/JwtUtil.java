@@ -13,7 +13,7 @@ import java.util.Date;
  **/
 public class JwtUtil {
 
-    private static final long EXPIRE_TIME = 10 * 1000;
+    private static final long EXPIRE_TIME = 60 * 1000;
 
     private static final String KEY_CLAIM = "account";
 

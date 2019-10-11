@@ -78,11 +78,11 @@ public class ShiroConfig {
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
-        filterChainDefinitionMap.put("/authc/*", "anon");
-        filterChainDefinitionMap.put("/user/*", "authc");
-
-        filterChainDefinitionMap.put("/user/update", "roles[user]");
-        filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
+//        filterChainDefinitionMap.put("/authc/*", "anon");
+//        filterChainDefinitionMap.put("/user/*", "authc");
+//
+//        filterChainDefinitionMap.put("/user/update", "roles[user]");
+//        filterChainDefinitionMap.put("/user/delete", "perms[Delete]");
 
         // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>();

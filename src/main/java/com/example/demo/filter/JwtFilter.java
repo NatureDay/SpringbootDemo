@@ -1,6 +1,7 @@
 package com.example.demo.filter;
 
 import com.example.demo.config.JwtToken;
+import com.google.common.base.Strings;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,17 +27,36 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         try {
-            executeLogin(request, response);
+            if (isNeedCheck(request, response)) {
+                return executeLogin(request, response);
+            }
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    /**
+     * 用于判断请求是否需要验证
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    private boolean isNeedCheck(ServletRequest request, ServletResponse response) {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        String path = httpServletRequest.getServletPath();
+        if (path.contains("/authc/")) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String token = httpServletRequest.getHeader(AUTHORIZATION_HEADER);
+        if (Strings.isNullOrEmpty(token)) return false;
         JwtToken jwtToken = new JwtToken(token);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         getSubject(request, response).login(jwtToken);

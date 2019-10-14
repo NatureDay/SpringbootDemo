@@ -13,7 +13,7 @@ import java.util.Date;
  **/
 public class JwtUtil {
 
-    private static final long EXPIRE_TIME = 60 * 1000;
+    private static final long EXPIRE_TIME = 60 * 60 * 1000;
 
     private static final String KEY_CLAIM = "account";
 
@@ -58,7 +58,7 @@ public class JwtUtil {
      * 生成签名,5min后过期
      *
      * @param account 用户名
-     * @param secret   用户的密码
+     * @param secret  用户的密码
      * @return 加密的token
      */
     public static String sign(String account, String secret) {

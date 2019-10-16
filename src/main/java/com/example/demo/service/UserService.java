@@ -3,9 +3,11 @@ package com.example.demo.service;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
+import com.example.demo.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +19,10 @@ public class UserService implements UserMapper {
     @Autowired
     private UserMapper userMapper;
 
+    @Resource
+    private RedisUtil redisUtil;
+
+
     @Override
     public void insertUser(User user) {
         userMapper.insertUser(user);
@@ -24,12 +30,30 @@ public class UserService implements UserMapper {
 
     @Override
     public User queryUserById(Integer id) {
-        return userMapper.queryUserById(id);
+        String key = "id_" + id;
+        User user = (User) redisUtil.get(key);
+        User newUser;
+        if (user == null) {
+            newUser = userMapper.queryUserById(id);
+            redisUtil.set(key, newUser);
+        } else {
+            newUser = user;
+        }
+        return newUser;
     }
 
     @Override
     public User queryUserByAccount(String account) {
-        return userMapper.queryUserByAccount(account);
+        String key = "account_" + account;
+        User user = (User) redisUtil.get(key);
+        User newUser;
+        if (user == null) {
+            newUser = userMapper.queryUserByAccount(account);
+            redisUtil.set(key, newUser);
+        } else {
+            newUser = user;
+        }
+        return newUser;
     }
 
     @Override
